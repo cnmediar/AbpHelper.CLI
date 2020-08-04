@@ -79,6 +79,7 @@ namespace EasyAbp.AbpHelper.Commands
 
         private async Task Run(CommandOption option)
         {
+           
             string directory = GetBaseDirectory(option.Directory);
             var entityFileName = option.Entity + ".cs";
 
@@ -104,6 +105,7 @@ namespace EasyAbp.AbpHelper.Commands
                 .Then<SetVariable>(
                     step =>
                     {
+                        
                         step.VariableName = "TemplateDirectory";
                         step.ValueExpression = new LiteralExpression<string>("/Templates/Crud");
                     })
@@ -132,7 +134,7 @@ namespace EasyAbp.AbpHelper.Commands
                     {
                         ifElse
                             .When(OutcomeNames.True)
-                            .AddCustomRepositoryGeneration()
+                           // .AddCustomRepositoryGeneration()
                             .Then("ServiceGeneration")
                             ;
                         ifElse

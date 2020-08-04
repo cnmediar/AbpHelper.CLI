@@ -8,13 +8,13 @@ end
 -}}
 using System;
 using {{ EntityInfo.Namespace }}.Dtos;
-using Volo.Abp.Application.Dtos;
-using Volo.Abp.Application.Services;
+using Abp.Application.Services;
+using Abp.Application.Services.Dto;
 
 namespace {{ EntityInfo.Namespace }}
 {
     public interface I{{ EntityInfo.Name }}AppService :
-        ICrudAppService< 
+        IAsyncCrudAppService< 
             {{ EntityInfo.Name }}Dto, 
             {{ EntityInfo.PrimaryKey ?? EntityInfo.CompositeKeyName }}, 
             PagedAndSortedResultRequestDto,

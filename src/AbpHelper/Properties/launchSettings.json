@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "AbpHelper": {
+      "commandName": "Project",
+      "commandLineArgs": "generate crud WeekTask -d E:\\tempcode\\abp\\FlyingtopTemplete  "
+    }
+  }
+}

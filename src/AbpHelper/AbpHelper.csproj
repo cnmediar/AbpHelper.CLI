@@ -43,6 +43,11 @@
     <Content Remove="Templates\**\*.*" />
     <EmbeddedResource Include="Templates\**\*.*" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Templates\Crud\Groups\Service\src\{{ProjectInfo.FullName}}.Application.Contracts\{{EntityInfo.RelativeDirectory}}\" />
+    <Folder Include="Templates\Service\Groups\Service\src\{{ProjectInfo.FullName}}.Application.Contracts\{{Option.Folder}}\" />
+  </ItemGroup>
   
   <PropertyGroup>
     <SatelliteResourceLanguages>en</SatelliteResourceLanguages>

@@ -25,7 +25,7 @@ namespace EasyAbp.AbpHelper.Steps.Abp
             LogInput(() => baseDirectory);
 
             TemplateType templateType;
-            if (Directory.EnumerateFiles(baseDirectory, "*.DbMigrator.csproj", SearchOption.AllDirectories).Any())
+            if (Directory.EnumerateFiles(baseDirectory, "*.Migrator.csproj", SearchOption.AllDirectories).Any())
                 templateType = TemplateType.Application;
             else if (Directory.EnumerateFiles(baseDirectory, "*.Host.Shared.csproj", SearchOption.AllDirectories).Any())
                 templateType = TemplateType.Module;
@@ -33,11 +33,11 @@ namespace EasyAbp.AbpHelper.Steps.Abp
                 throw new NotSupportedException($"Unknown ABP project structure. Directory: {baseDirectory}");
 
             // Assume the domain project must be existed for an ABP project
-            var domainCsprojFile = Directory.EnumerateFiles(baseDirectory, "*.Domain.csproj", SearchOption.AllDirectories).FirstOrDefault();
+            var domainCsprojFile = Directory.EnumerateFiles(baseDirectory, "*.Core.csproj", SearchOption.AllDirectories).FirstOrDefault();
             if (domainCsprojFile == null) throw new NotSupportedException($"Cannot find the domain project file. Make sure it is a valid ABP project. Directory: {baseDirectory}");
 
             var fileName = Path.GetFileName(domainCsprojFile);
-            var fullName = fileName.RemovePostFix(".Domain.csproj");
+            var fullName = fileName.RemovePostFix(".Core.csproj");
 
             UiFramework uiFramework;
             if (Directory.EnumerateFiles(baseDirectory, "*.cshtml", SearchOption.AllDirectories).Any())

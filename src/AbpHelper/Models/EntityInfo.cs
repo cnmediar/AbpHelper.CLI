@@ -25,7 +25,10 @@ namespace EasyAbp.AbpHelper.Models
         public string? BaseType { get; }
         public string? PrimaryKey { get; }
         public List<PropertyInfo> Properties { get; } = new List<PropertyInfo>();
+
+        public List<PropertyInfo> GetinProperties { get; } = new List<PropertyInfo>();
         public string? CompositeKeyName { get; set; }
         public List<PropertyInfo> CompositeKeys { get; } = new List<PropertyInfo>();
+        public string Summer { get; set; }
     }
 }

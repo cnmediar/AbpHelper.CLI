@@ -6,20 +6,21 @@ else
     createDto = "CreateUpdate" + EntityInfo.Name + "Dto"
     updateDto = "CreateUpdate" + EntityInfo.Name + "Dto"
 end
-if Option.CustomRepository
-    repositoryType = "I" + EntityInfo.Name + "Repository"
+if Option.CustomRepository 
+    repositoryType = "IRepository<" + EntityInfo.Name + ">"
     repositoryName = "_repository"
+
 else
     if EntityInfo.CompositeKeyName
         repositoryType = "IRepository<" + EntityInfo.Name + ">"
     else
         repositoryType = "IRepository<" + EntityInfo.Name + ", " + EntityInfo.PrimaryKey + ">"
     end
-    repositoryName = "Repository"
+    repositoryName = "_" + EntityInfo.Name + "Repository"
 end ~}}
 using System;
 {{~ if !EntityInfo.CompositeKeyName
-    crudClassName = "CrudAppService"
+    crudClassName = "AsyncCrudAppService"
 else
     crudClassName = "AbstractKeyCrudAppService"
 ~}}
@@ -32,10 +33,10 @@ using System.Threading.Tasks;
 using {{ ProjectInfo.FullName }}.Permissions;
 {{~ end ~}}
 using {{ EntityInfo.Namespace }}.Dtos;
-using Volo.Abp.Application.Dtos;
-using Volo.Abp.Application.Services;
+using Abp.Application.Services;
+using Abp.Application.Services.Dto;
 {{~ if !Option.CustomRepository ~}}
-using Volo.Abp.Domain.Repositories;
+using Abp.Domain.Repositories;
 {{~ end ~}}
 
 namespace {{ EntityInfo.Namespace }}
@@ -44,17 +45,18 @@ namespace {{ EntityInfo.Namespace }}
         I{{ EntityInfo.Name }}AppService
     {
         {{~ if !Option.SkipPermissions ~}}
-        protected override string GetPolicyName { get; set; } = {{ permissionNamesPrefix }}.Default;
-        protected override string GetListPolicyName { get; set; } = {{ permissionNamesPrefix }}.Default;
-        protected override string CreatePolicyName { get; set; } = {{ permissionNamesPrefix }}.Create;
-        protected override string UpdatePolicyName { get; set; } = {{ permissionNamesPrefix }}.Update;
-        protected override string DeletePolicyName { get; set; } = {{ permissionNamesPrefix }}.Delete;
+        protected override string GetPermissionName { get; set; } = {{ permissionNamesPrefix }}.Default;
+        protected override string GetAllPermissionName { get; set; } = {{ permissionNamesPrefix }}.Default;
+        protected override string CreatePermissionName { get; set; } = {{ permissionNamesPrefix }}.Create;
+        protected override string UpdatePermissionName { get; set; } = {{ permissionNamesPrefix }}.Update;
+        protected override string DeletePermissionName { get; set; } = {{ permissionNamesPrefix }}.Delete;
         {{~ end ~}}
 
-        {{~ if Option.CustomRepository ~}}
+        {{~ if !Option.CustomRepository ~}}
         private readonly {{ repositoryType }} {{ repositoryName }};
-        
-        public {{ EntityInfo.Name }}AppService({{ repositoryType }} repository) : base(repository)
+       
+
+public {{ EntityInfo.Name }}AppService({{ repositoryType }} repository) : base(repository)
         {
             {{ repositoryName }} = repository;
         }

@@ -13,7 +13,7 @@
             builder.Entity<{{ EntityInfo.Name }}>(b =>
             {
                 b.ToTable({{ ProjectInfo.Name }}Consts.DbTablePrefix + "{{ EntityInfo.NamePluralized }}", {{ ProjectInfo.Name }}Consts.DbSchema);
-                b.ConfigureByConvention(); 
+              //  b.ConfigureByConvention(); 
                 {{ configCompositeKey }}
                 /* Configure more properties here */
             });
@@ -22,7 +22,7 @@
             builder.Entity<{{ EntityInfo.Name }}>(b =>
             {
                 b.ToTable(options.TablePrefix + "{{ EntityInfo.NamePluralized }}", options.Schema);
-                b.ConfigureByConvention(); 
+               // b.ConfigureByConvention(); 
                 {{ configCompositeKey }}
                 /* Configure more properties here */
             });
