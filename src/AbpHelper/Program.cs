@@ -10,9 +10,9 @@ using CommandLineBuilder = EasyAbp.AbpHelper.Commands.CommandLineBuilder;
 
 namespace EasyAbp.AbpHelper
 {
-    internal class Program
+    public class Program
     {
-        private static async Task Main(string[] args)
+        public static async Task Main(string[] args)
         {
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Debug()
@@ -37,6 +37,10 @@ namespace EasyAbp.AbpHelper
                     .Build();
 
                 await parser.InvokeAsync(args);
+
+               
+
+
             }
         }
     }

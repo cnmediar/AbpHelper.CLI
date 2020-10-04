@@ -80,6 +80,7 @@ namespace EasyAbp.AbpHelper.Commands
         private async Task Run(CommandOption option)
         {
            
+            
             string directory = GetBaseDirectory(option.Directory);
             var entityFileName = option.Entity + ".cs";
 
